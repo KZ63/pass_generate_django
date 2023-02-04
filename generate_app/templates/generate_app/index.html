@@ -1,0 +1,45 @@
+{% extends "generate_app/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2>パスワード生成</h2>
+<p>オプション</p>
+<div id="pass_options">
+    <!-- 桁数 -->
+    <div class="digit">
+        <p>桁数</p>
+        <form id="digitradioBox">
+            <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioBox" id="flexRadioDefault1" value="5" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">5桁</label>
+            </div>
+            <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioBox" id="flexRadioDefault2" value="8">
+                    <label class="form-check-label" for="flexRadioDefault2">8桁</label>
+            </div>
+        </form>
+    </div>
+    <!-- 数字/記号/アルファベット -->
+    <div class="word">
+        <p>文字</p>
+        <label><input type="checkbox" name="wordradiobox" value="upper" checked/>大文字</label>
+        <label><input type="checkbox" name="wordradiobox" value="lower" />小文字</label>
+        <label><input type="checkbox" name="wordradiobox" value="number" />数字</label>
+        <label><input type="checkbox" name="wordradiobox" value="signal" />記号</label>
+    </div>
+</div>
+<button id="generate" class="btn btn-outline-primary" onclick="getPassword()">パスワード生成</button>
+<div>
+    <h2>パスワード一覧</h2>
+    <ul id="passwords">
+        {% for pass in passwords %}
+            <li>{{ pass }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'generate_app/index.js' %}"></script>
+{% endblock %}

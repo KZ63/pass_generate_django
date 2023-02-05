@@ -29,13 +29,14 @@
     </div>
 </div>
 <button id="generate" class="btn btn-outline-primary" onclick="getPassword()">パスワード生成</button>
+<a href="{% url 'create' %}">パスワード登録</a>
 <div>
     <h2>パスワード一覧</h2>
-    <ul id="passwords">
-        {% for pass in passwords %}
-            <li>{{ pass }}</li>
-        {% endfor %}
-    </ul>
+    <div id="passwords">
+        <!-- {% for pass in passwords %}
+            <p>{{ pass }}</p>
+        {% endfor %} -->
+    </div>
 </div>
 
 {% endblock %}

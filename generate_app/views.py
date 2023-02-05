@@ -36,3 +36,7 @@ def generate(request):
     return JsonResponse({
         "password_list": password_list
     })
+
+def create(request):
+    print('create')
+    return render(request, 'generate_app/index.html')

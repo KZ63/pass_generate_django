@@ -10,6 +10,7 @@ from django.shortcuts import render
 import random
 import string
 from django.http import JsonResponse
+from .forms import PassWordForm
 
 
 # Create your views here.
@@ -38,5 +39,12 @@ def generate(request):
     })
 
 def create(request):
-    print('create')
-    return render(request, 'generate_app/index.html')
+    if request.method == 'POST':
+        form = PassWordForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return render(request, 'generate_app/index.html')
+    else:
+        form = PassWordForm()
+        return render(request, 'generate_app/pass_apply.html', {'form': form})

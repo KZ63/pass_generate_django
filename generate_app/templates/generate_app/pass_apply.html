@@ -1,0 +1,18 @@
+{% extends "generate_app/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1>パスワード登録</h1>
+<div id="pass_apply_container">
+      <form id="pass_apply" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+      </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'generate_app/index.js' %}"></script>
+{% endblock %}

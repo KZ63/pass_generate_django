@@ -1,16 +1,19 @@
 """
 Todo
 ✅記号
-□パスワードの保存機能
+✅パスワードの保存機能
+✅一覧表示
 □バックアップ取得（Excelでのダウンロード）
 □レイアウト整形（bootstrap導入）
 □テスト
+□ログイン機能
 """
 from django.shortcuts import render
 import random
 import string
 from django.http import JsonResponse
 from .forms import PassWordForm
+from .models import PassWord
 
 
 # Create your views here.
@@ -38,6 +41,7 @@ def generate(request):
         "password_list": password_list
     })
 
+# パスワード登録
 def create(request):
     if request.method == 'POST':
         form = PassWordForm(request.POST)
@@ -48,3 +52,9 @@ def create(request):
     else:
         form = PassWordForm()
         return render(request, 'generate_app/pass_apply.html', {'form': form})
+
+# パスワード一覧表示
+def show_passwords(request):
+    passwords = PassWord.objects.all()
+    print(passwords)
+    return render(request, 'generate_app/show_passwords.html', {'passwords': passwords})

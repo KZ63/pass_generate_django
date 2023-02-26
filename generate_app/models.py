@@ -5,3 +5,4 @@ class PassWord(models.Model):
       service_name = models.CharField(max_length=50)
       passWord = models.CharField(max_length=20)
       url = models.CharField(max_length=255)
+      user_id = models.CharField(max_length=255)

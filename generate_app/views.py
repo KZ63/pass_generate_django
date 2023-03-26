@@ -4,9 +4,9 @@ Todo
 ✅パスワードの保存機能
 ✅一覧表示
 ✅バックアップ取得（Excelでのダウンロード）
+□ログイン機能
 □レイアウト整形（bootstrap導入）
 □テスト
-□ログイン機能
 """
 from django.shortcuts import render
 import random

@@ -5,6 +5,8 @@ Todo
 ✅一覧表示
 ✅バックアップ取得（Excelでのダウンロード）
 □ログイン機能
+- ✅画面の実装
+- □パスワードのハッシュ化
 □レイアウト整形（bootstrap導入）
 □テスト
 """
@@ -15,10 +17,39 @@ import csv, urllib, datetime
 from django.http import JsonResponse
 from .forms import PassWordForm
 from .models import PassWord
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import TemplateView
+from .forms import AccountForm, AddAccountForm
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
+def Login(request):
+    if request.method == 'POST':
+        Id = request.POST.get('userId')
+        Pass = request.POST.get('password')
+
+        user = authenticate(username = Id, password = Pass)
+        print(user)
+        if user:
+            if user.is_active:
+                print('active')
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse('アカウントが有効ではありません。')
+        else:
+            return HttpResponse('ログインIDまたはパスワードが間違っています。')
+    else:
+        return render(request, 'generate_app/Login.html')
+
+@login_required
+def Logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('Login'))
 
 # Create your views here.
+@login_required
 def index(request):
     return render(request, 'generate_app/index.html')
 
@@ -74,3 +105,42 @@ def export_password(request):
     for password in password_list:
         writer.writerow([password.service_name, password.passWord, password.url])
     return response
+
+
+class AccountRegistration(TemplateView):
+
+    def __init__(self):
+        self.params = {
+            "AccountCreate": False,
+            "account_form": AccountForm(),
+            "add_account_form": AddAccountForm(),
+        }
+    
+    def get(self, request):
+        self.params["account_form"] = AccountForm()
+        self.params["add_account_form"] = AddAccountForm()
+        self.params["AccountCreate"] = False
+        return render(request, "generate_app/register.html", context=self.params)
+    
+    def post(self, request):
+        self.params["account_form"] = AccountForm(data=request.POST)
+        self.params["add_account_form"] = AddAccountForm(data=request.POST)
+
+        if self.params["account_form"].is_valid() and self.params["add_account_form"].is_valid():
+            account = self.params["account_form"].save()
+            account.set_password(account.password)
+            account.save()
+
+            add_account = self.params["add_account_form"].save(commit=False)
+            add_account.user = account
+
+            if 'account_image' in request.FILES:
+                add_account.account_image = request.FILES['account_image']
+            
+            add_account.save()
+
+            self.params["AccountCreate"] = True
+        else:
+            print(self.params["account_form"].errors)
+        
+        return render(request, "generate_app/register.html", context=self.params)

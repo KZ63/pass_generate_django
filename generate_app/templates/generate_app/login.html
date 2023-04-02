@@ -4,28 +4,27 @@
       <head>
             <meta charset="utf-8">
             <title></title>
-            <link rel="stylesheet" href="{% static 'generate_app/styles.css' %}">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link rel="stylesheet" href="{% static 'generate_app/loginstyles.css' %}">
 
-            </head>
-            <body>
-            <h1>ログイン画面</h1>
-
-            <div class="reg">
+      </head>
+      <body class="text-center">
+            <main class="form-signin w-100 m-auto">
                   <form method="post" action="{% url 'Login' %}">
-                  {% csrf_token %}
-                        <table class="reg_form">
-                              <tr>
-                                    <td><label for="userid">ユーザーID:</label></td>
-                                    <td><input type="text" name="userid"></td>
-                                    <td><label for="password">パスワード：</label></td>
-                                    <td><input type="password" name="password"></td>
-                              </tr>
-                        </table>
-                        <input type="submit" class="btn" value="Login">
+                        {% csrf_token %}
+                        <img class="mb-4" src="../images/bootstrap-logo.svg" alt="" width="72" height="57" loading="lazy">
+                        <h1 class="h3 mb-3 fw-normal">サインインをどうぞ</h1>
+                        <div class="form-floating">
+                              <input type="text" class="form-control" name="userid" id="floatingInput" placeholder="ユーザID">
+                        </div>
+                        <div class="form-floating">
+                              <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="パスワード">
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
                   </form>
-            </div>
-            <p class="message">アカウントをお持ちですか？：
-                  <a href="{% url 'register' %}">アカウントを作成</a>
-            </p>
+                  <p class="message">アカウントをお持ちですか？：
+                        <a href="{% url 'register' %}">アカウントを作成</a>
+                  </p>
+            </main>
       </body>
 </html>

@@ -17,17 +17,20 @@
              </button>
              <div class="collapse navbar-collapse justify-content-end" id="navbarNav4">
                  <ul class="navbar-nav">
-                     <li class="nav-item active">
-                         <a class="nav-link" href="{% url 'index' %}">トップ<span class="sr-only">(current)</span></a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="{% url 'create' %}">パスワード登録</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="{% url 'show_passwords' %}">一覧表示</a>
-                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'index' %}">トップ<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create' %}">パスワード登録</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'show_passwords' %}">一覧表示</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'export_password' %}">エクスポート</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Logout' %}">ログアウト</a>
                     </li>
                 </ul>
             </div>

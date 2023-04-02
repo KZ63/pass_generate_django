@@ -49,9 +49,10 @@ function getPassword() {
         console.log(response.password_list);
         const passArea = document.getElementById('passwords');
         for(i = 0; i < response.password_list.length; i++) {
-            const element = Object.assign(document.createElement('div'), {
-                innerHTML: response.password_list[i]
+            const element = Object.assign(document.createElement('p'), {
+                innerHTML: response.password_list[i],
             });
+            element.style.cssText = 'padding: 10px; border: 1px solid #333; backgroud: f2f2f2;'
             passArea.appendChild(element);
         }
     })

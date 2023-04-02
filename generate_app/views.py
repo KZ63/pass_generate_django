@@ -26,7 +26,7 @@ from django.contrib.auth.decorators import login_required
 
 def Login(request):
     if request.method == 'POST':
-        Id = request.POST.get('userId')
+        Id = request.POST.get('userid')
         Pass = request.POST.get('password')
 
         user = authenticate(username = Id, password = Pass)
@@ -78,6 +78,7 @@ def generate(request):
 def create(request):
     if request.method == 'POST':
         form = PassWordForm(request.POST)
+        form.user_id = request.user.id
         if form.is_valid():
             post = form.save(commit=False)
             post.save()

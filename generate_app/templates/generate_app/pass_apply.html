@@ -2,12 +2,19 @@
 {% load static %}
 
 {% block body %}
-<h1>パスワード登録</h1>
+<div class="page-header">
+      <h2>パスワード登録</h2>      
+</div>
 <div id="pass_apply_container">
       <form id="pass_apply" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="save btn btn-default">Save</button>
+            {% for item in form %}
+            <div class="mb-3">
+                  <label for="{{ item.id_for_label }}" class="form-label">{{ item.label }}</label>
+                  <input type="{{ item.field.widget.input_type }}" class="form-control" id="{{ item.id_for_label }}">
+            </div>
+            {% endfor %}
+            <button type="submit" class="save btn btn-primary">登録</button>
       </form>
 </div>
 

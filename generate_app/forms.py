@@ -5,7 +5,7 @@ from .models import PassWord, Account
 class PassWordForm(forms.ModelForm):
       class Meta:
             model = PassWord
-            fields = {'url', 'passWord', 'service_name'}
+            fields = {'service_name', 'passWord', 'url'}
 
 
 class AccountForm(forms.ModelForm):

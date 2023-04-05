@@ -7,6 +7,7 @@ Todo
 ✅ログイン機能
 - ✅画面の実装
 - ✅パスワードのハッシュ化
+✅削除機能
 □レイアウト整形（bootstrap導入）
 □テスト
 """
@@ -88,9 +89,9 @@ def create(request):
         return render(request, 'generate_app/pass_apply.html', {'form': form})
 
 # パスワード一覧表示
+@login_required
 def show_passwords(request):
     passwords = PassWord.objects.all()
-    print(passwords)
     return render(request, 'generate_app/show_passwords.html', {'passwords': passwords})
 
 # パスワード一覧エクスポート

@@ -108,6 +108,15 @@ def export_password(request):
         writer.writerow([password.service_name, password.passWord, password.url])
     return response
 
+@login_required
+def delete(request, id):
+    delete_target = PassWord.objects.filter(id=id)
+    try:
+        delete_target.delete()
+        return HttpResponseRedirect(reverse('show_passwords'))
+    except Exception as e:
+        print(e)
+
 
 class AccountRegistration(TemplateView):
 

@@ -79,7 +79,7 @@ def generate(request):
 def create(request):
     if request.method == 'POST':
         form = PassWordForm(request.POST)
-        form.user_id = request.user.id
+        # form.user_id = request.user.id
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
